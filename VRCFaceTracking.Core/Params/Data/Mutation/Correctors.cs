@@ -76,15 +76,9 @@ public class Correctors : TrackingMutation
             // Easy for Y since human eyes can't rlly diverge that way. We'll just grab the median
             var combinedY = (data.Eye.Right.Gaze.y + data.Eye.Left.Gaze.y) / 2;
             data.Eye.Right.Gaze.y = combinedY;
-            data.Eye.Right.Gaze.y = combinedY;
+            data.Eye.Left.Gaze.y = combinedY;
             
-            // Harder for X since we need to account for convergence
-            // We'll flip one of them, find the median and diff, and then use that
-            // Might need to redo this in the future. Who knows. Works for now :)
-            var combinedX = (data.Eye.Right.Gaze.x + -data.Eye.Left.Gaze.x) / 2;
-            var diff = (data.Eye.Right.Gaze.x - -data.Eye.Left.Gaze.x) / 2;
-            data.Eye.Right.Gaze.x = combinedX + diff;
-            data.Eye.Left.Gaze.x = -(combinedX - diff);
+            //TODO: Figure out eyex convergence
         }
     }
 }
